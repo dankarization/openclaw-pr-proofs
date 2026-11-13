@@ -1,0 +1,47 @@
+{
+  "kind": "Live integrated Gateway qualification",
+  "observedAt": "2026-11-13T09:55:04.322Z",
+  "integrationCommit": "644e17833325a72372121133a104e056c73ae007",
+  "releaseBase": "2026.11.3",
+  "maintainerReplacements": [
+    "https://github.com/openclaw/openclaw/pull/197658",
+    "https://github.com/openclaw/openclaw/pull/198022"
+  ],
+  "scope": "Locally integrated build, not the exact public PR head",
+  "models": {
+    "parent": "openai/gpt-6.1-sol",
+    "child": "openai/gpt-6.1-terra"
+  },
+  "events": [
+    {
+      "at": "2026-11-13T09:53:46.168Z",
+      "actor": "parent",
+      "result": {
+        "status": "yielded"
+      }
+    },
+    {
+      "at": "2026-11-13T09:53:52.351Z",
+      "actor": "child",
+      "tool": "Gateway exec",
+      "command": "sleep 55; printf QA_MANAGED_NONCE=; od -An -N16 -tx1 /dev/urandom | tr -d ' \\n'; printf '\\nQA_CHILD_UTC='; date -u +%Y-%m-%dT%H:%M:%SZ"
+    },
+    {
+      "at": "2026-11-13T09:54:50.238Z",
+      "actor": "child",
+      "stdout": "QA_MANAGED_NONCE=45d8d7dc69b5de1c11a5189bebbd0d1d\nQA_CHILD_UTC=2026-11-13T09:54:50Z"
+    },
+    {
+      "at": "2026-11-13T09:55:04.322Z",
+      "actor": "same parent",
+      "returnedStdout": "QA_MANAGED_NONCE=45d8d7dc69b5de1c11a5189bebbd0d1d\nQA_CHILD_UTC=2026-11-13T09:54:50Z"
+    }
+  ],
+  "manualWakeSent": false,
+  "repeatedSpawn": false,
+  "limitations": [
+    "The child did not discover session_status or runtime tool-search; that capability was not verified.",
+    "This does not prove that every symptom in issue #196199 is fixed.",
+    "This is a redacted event extract. Private session IDs, user conversations, host addresses and credentials are omitted."
+  ]
+}
